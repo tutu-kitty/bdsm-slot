@@ -1,0 +1,6 @@
+.env
+data/history.json
+logs/
+node_modules/
+__pycache__/
+last5.txt

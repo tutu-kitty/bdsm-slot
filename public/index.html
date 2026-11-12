@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>BDSM · Roulette — 调教轮盘</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Noto+Serif+SC:wght@600;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0808; --leather:#161010; --leather2:#1e1414;
+  --blood:#a31212; --blood-dk:#6d0a0a; --blood-lt:#d21c1c;
+  --metal-hi:#c9c2b8; --metal-lo:#5a544c;
+  --ink:#e8e0da; --ink-dim:#8f8680;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  background:
+    radial-gradient(ellipse at 50% -20%, #241313 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 120%, #1a0d0d 0%, transparent 50%),
+    var(--bg);
+  color:var(--ink);
+  font-family:"Noto Serif SC", serif;
+  min-height:100vh; display:flex; flex-direction:column; align-items:center;
+  padding:22px 14px 40px;
+}
+body::before{
+  content:""; position:fixed; inset:0; pointer-events:none;
+  background:repeating-linear-gradient(0deg, transparent 0 11px, rgba(255,255,255,.012) 11px 12px),
+             repeating-linear-gradient(90deg, transparent 0 11px, rgba(0,0,0,.18) 11px 12px);
+}
+.wrap{width:100%; max-width:430px; position:relative; z-index:1}
+
+.plaque{
+  position:relative; text-align:center; padding:26px 18px 20px; margin-bottom:22px;
+  background:linear-gradient(160deg, var(--leather2), var(--leather) 60%, #120c0c);
+  border:1px solid var(--metal-lo); border-radius:10px;
+  box-shadow:0 10px 30px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.05);
+}
+.plaque::before,.plaque::after,.card::before,.card::after{
+  content:""; position:absolute; width:11px; height:11px; border-radius:50%;
+  background:radial-gradient(circle at 35% 30%, var(--metal-hi), var(--metal-lo) 70%, #2e2a25);
+  box-shadow:0 1px 2px rgba(0,0,0,.9), inset 0 -1px 1px rgba(0,0,0,.6);
+}
+.plaque::before{top:9px;left:9px} .plaque::after{top:9px;right:9px}
+.card::before{bottom:9px;left:9px} .card::after{bottom:9px;right:9px}
+
+h1{
+  font-family:Cinzel, serif; font-size:26px; letter-spacing:3px;
+  color:var(--blood-lt); text-shadow:0 0 18px rgba(210,28,28,.35), 0 2px 0 #000; font-weight:800;
+}
+.sub{margin-top:8px; font-size:13px; letter-spacing:10px; color:var(--ink-dim); text-indent:10px}
+.rule{height:1px; margin:14px 30px 0; background:linear-gradient(90deg, transparent, var(--blood-dk), transparent); position:relative}
+.rule::after{content:"⛓"; position:absolute; left:50%; top:-10px; transform:translateX(-50%); color:var(--blood-dk); font-size:12px}
+
+.card{
+  position:relative; padding:24px 20px 20px; margin-bottom:18px; min-height:320px;
+  background:linear-gradient(170deg, var(--leather2), var(--leather) 55%, #100b0b);
+  border:1px solid var(--metal-lo); border-radius:10px;
+  box-shadow:0 12px 34px rgba(0,0,0,.75), inset 0 1px 0 rgba(255,255,255,.05);
+}
+.card::before{top:9px;left:9px} .card::after{top:9px;right:9px}
+.stamp{
+  position:absolute; top:16px; right:18px; font-family:Cinzel,serif; font-size:11px;
+  color:var(--blood-lt); border:1px solid var(--blood-dk); padding:4px 9px; letter-spacing:2px;
+  transform:rotate(8deg); opacity:.85; text-shadow:0 0 8px rgba(210,28,28,.4);
+}
+.field{margin:12px 0; opacity:0; transform:translateY(6px); animation:rise .45s forwards}
+@keyframes rise{to{opacity:1;transform:none}}
+.label{font-size:11px; letter-spacing:5px; color:var(--blood-lt); margin-bottom:4px}
+.label::before{content:"⚡"; margin-right:6px; font-size:9px; color:var(--blood-dk)}
+.value{font-size:16px; line-height:1.65; color:var(--ink); text-shadow:0 1px 0 #000}
+.value.dim{color:var(--ink-dim)}
+.quote{
+  margin-top:16px; padding:14px 16px; border-left:2px solid var(--blood);
+  background:linear-gradient(90deg, rgba(163,18,18,.10), transparent);
+  font-size:15px; color:#f0d9d9; font-weight:600;
+}
+.care{
+  margin-top:14px; padding:10px 14px; border:1px dashed var(--metal-lo); border-radius:6px;
+  font-size:13px; color:var(--ink-dim);
+}
+.care b{color:#d8c9a0; font-weight:600}
+.release{
+  margin-top:12px; padding:10px 14px; border:1px dashed var(--blood-dk); border-radius:6px;
+  font-size:13px; color:#e8c9c9;
+}
+.release b{color:var(--blood-lt); font-weight:600}
+
+.rolling .value{color:#5f5852; animation:blurroll .12s infinite}
+@keyframes blurroll{0%{filter:blur(1.5px);transform:translateX(-2px)}50%{filter:blur(.5px);transform:translateX(2px)}100%{filter:blur(1.5px)}}
+
+.stamped{animation:stamp .5s cubic-bezier(.2,2.4,.4,1) both}
+@keyframes stamp{0%{transform:scale(2.1) rotate(14deg);opacity:0}60%{transform:scale(.95) rotate(7deg);opacity:1}100%{transform:scale(1) rotate(8deg);opacity:.85}}
+
+.controls{display:flex; gap:12px; margin-bottom:14px}
+.btn{
+  flex:1; cursor:pointer; user-select:none; -webkit-tap-highlight-color:transparent;
+  padding:16px 0; font-family:Cinzel,"Noto Serif SC",serif; font-weight:800; letter-spacing:3px;
+  font-size:15px; color:#f2e6e6; border-radius:8px;
+  background:linear-gradient(180deg, #8e1212, var(--blood-dk) 55%, #4a0606);
+  border:1px solid #c9a08a33;
+  box-shadow:0 6px 18px rgba(163,18,18,.28), inset 0 1px 0 rgba(255,255,255,.18), inset 0 -6px 12px rgba(0,0,0,.5);
+  transition:transform .12s, box-shadow .12s, filter .2s;
+}
+.btn:active{transform:translateY(3px); box-shadow:0 2px 8px rgba(163,18,18,.2), inset 0 3px 8px rgba(0,0,0,.6)}
+.btn.ghost{
+  flex:.7; color:var(--ink-dim);
+  background:linear-gradient(180deg,#1c1616,#120d0d);
+  border:1px solid var(--metal-lo); box-shadow:0 4px 12px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.05);
+}
+.btn.ghost:active{transform:translateY(2px)}
+.btn:disabled{filter:grayscale(.7) brightness(.6); cursor:wait; transform:none}
+
+.foot{margin-top:6px; text-align:center; font-size:11px; color:#4a423d; letter-spacing:2px}
+
+.empty{ text-align:center; padding:70px 0 60px; color:var(--ink-dim) }
+.empty .glyph{font-size:44px; color:var(--blood-dk); display:block; margin-bottom:18px; text-shadow:0 0 24px rgba(163,18,18,.3)}
+.empty p{font-size:13px; letter-spacing:6px; text-indent:6px}
+
+.card.flip{animation:flip .6s both}
+@keyframes flip{0%{transform:rotateX(75deg) translateY(14px); opacity:0}100%{transform:none;opacity:1}}
+
+.pre{white-space:pre-wrap; font-size:14px; line-height:1.7; color:var(--ink)}
+
+/* 三连抽 mini 卡 */
+.mini{
+  background:linear-gradient(170deg,#1a1414,#120d0d);
+  border:1px solid var(--blood-dk); border-radius:8px;
+  padding:14px 14px 12px; margin:12px 0;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05), 0 6px 16px rgba(0,0,0,.5);
+}
+.mini-head{display:flex; align-items:center; gap:10px; margin-bottom:10px}
+.badge{
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  background:radial-gradient(circle at 35% 30%, var(--blood-lt), var(--blood-dk));
+  color:#fff; font-family:Cinzel,serif; font-weight:800; font-size:13px;
+  box-shadow:0 0 10px rgba(210,28,28,.4);
+}
+.mini-t{font-size:13px; letter-spacing:2px; color:var(--ink-dim)}
+.mini-line{font-size:13.5px; line-height:1.7; color:var(--ink)}
+.mini-line b{color:var(--blood-lt); font-weight:600; margin-right:4px}
+.mini .quote{margin:10px 0 0; font-size:13.5px; padding:8px 12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="plaque">
+    <h1>BDSM · ROULETTE</h1>
+    <div class="sub">调 教 轮 盘</div>
+    <div class="rule"></div>
+  </div>
+
+  <div class="card" id="card">
+    <div class="empty" id="empty">
+      <span class="glyph">⛓</span>
+      <p>跪 好 · 张 腿 · 转</p>
+    </div>
+    <div class="stamp" id="stamp" style="display:none">HIT</div>
+    <div id="fields"></div>
+  </div>
+
+  <div class="controls">
+    <button class="btn" id="spinBtn">SPIN</button>
+    <button class="btn ghost" id="rerollBtn">重转</button>
+    <button class="btn ghost" id="streakBtn">三连</button>
+  </div>
+  <div class="foot">18+ · 自愿 · 虚构 · SAFE WORD 永远有效</div>
+</div>
+
+<script>
+const TOKEN = "__TOKEN__";
+const $ = (id) => document.getElementById(id);
+const card = $("card"), fieldsEl = $("fields"), stampEl = $("stamp"), emptyEl = $("empty");
+
+const ORDER = [
+  ["body_parts","部 位"], ["bondage","束 缚"], ["training","调 教"], ["actions","动 作"],
+  ["fluids","体 液"], ["props","道 具"], ["location","位 置"], ["timing","时 机"],
+  ["intensity","强 度"], ["extras","附 加"], ["humiliation","羞 辱"], ["punishment","惩 罚"],
+  ["feature","加 演"], ["marks","留 痕"], ["ending","收 尾"]
+];
+const NOISE = ["龟甲缚","戒尺","80 下","飘窗","吊缚","木马","羞耻调教","屁眼","四角绑","KTV 包间"];
+let busy = false;
+
+function skeleton(){
+  fieldsEl.innerHTML = "";
+  emptyEl.style.display = "none";
+  stampEl.style.display = "none";
+  stampEl.classList.remove("stamped");
+  card.classList.add("rolling");
+  for (const [id,label] of ORDER){
+    const f = document.createElement("div");
+    f.className = "field"; f.dataset.slot = id;
+    f.innerHTML = `<div class="label">${label}</div><div class="value">${NOISE[Math.floor(Math.random()*NOISE.length)]}</div>`;
+    fieldsEl.appendChild(f);
+  }
+}
+function rollingTick(){
+  document.querySelectorAll("#fields .value").forEach(v => {
+    v.textContent = NOISE[Math.floor(Math.random()*NOISE.length)];
+  });
+}
+
+function fmt(v){
+  if (Array.isArray(v)) return v.join(" + ");
+  if (v && typeof v === "object") return "「" + v.subpool + "」" + v.item;
+  return String(v);
+}
+
+function render(picks){
+  card.classList.remove("rolling");
+  fieldsEl.innerHTML = "";
+  for (const [id,label] of ORDER){
+    const v = picks[id];
+    if (v === undefined || v === null || v === "" || v === "无") continue;
+    const f = document.createElement("div");
+    f.className = "field";
+    let val = fmt(v);
+    if (id === "count") val += " 下";
+    f.innerHTML = `<div class="label">${label}</div><div class="value">${val}</div>`;
+    fieldsEl.appendChild(f);
+  }
+  if (picks.release){
+    const f = document.createElement("div");
+    f.className = "field";
+    f.innerHTML = `<div class="release"><b>🔓 解除条件</b> · ${picks.release}</div>`;
+    fieldsEl.appendChild(f);
+  }
+  if (picks.buffer){
+    const f = document.createElement("div");
+    f.className = "field";
+    f.innerHTML = `<div class="care"><b>🫧 缓冲</b> · ${picks.buffer}</div>`;
+    fieldsEl.appendChild(f);
+  }
+  const q = document.createElement("div");
+  q.className = "field";
+  q.innerHTML = `<div class="quote">💬 "${picks.quote}"</div>`;
+  fieldsEl.appendChild(q);
+  stampEl.style.display = "block";
+  stampEl.classList.add("stamped");
+  card.classList.remove("flip"); void card.offsetWidth;
+  card.classList.add("flip");
+}
+
+async function pull(kind){
+  if (busy) return;
+  busy = true;
+  ["spinBtn","rerollBtn","streakBtn"].forEach(id=>$(id).disabled = true);
+  skeleton();
+  const roller = setInterval(rollingTick, 90);
+  try {
+    const res = await fetch("api/" + kind, {
+      method: "POST",
+      headers: {"Content-Type":"application/json", "Authorization":"Bearer " + TOKEN},
+      body: "{}"
+    });
+    const data = await res.json();
+    setTimeout(() => {
+      clearInterval(roller);
+      if (data.picks) {
+        render(data.picks);
+      } else if (data.rounds) {
+        card.classList.remove("rolling");
+        stampEl.style.display = "block";
+        stampEl.classList.add("stamped");
+        fieldsEl.innerHTML = "";
+        data.rounds.forEach((r, i) => {
+          const p = r.picks;
+          const f = document.createElement("div");
+          f.className = "field mini";
+          f.innerHTML = `<div class="mini"><div class="mini-head"><span class="badge">${i+1}</span><span class="mini-t">强度 ${p.intensity} · 道具 ${Array.isArray(p.props)?p.props.length:"?"} 件</span></div>` +
+            `<div class="mini-line"><b>部位</b>${fmt(p.body_parts)}</div>` +
+            `<div class="mini-line"><b>束缚</b>${p.bondage} · <b>调教</b>${fmt(p.training)}</div>` +
+            `<div class="mini-line"><b>道具</b>${fmt(p.props)}</div>` +
+            `<div class="mini-line"><b>加演</b>${fmt(p.feature)}</div>` +
+            `<div class="quote">💬 "${p.quote}"</div></div>`;
+          fieldsEl.appendChild(f);
+        });
+      } else {
+      busy = false;
+      ["spinBtn","rerollBtn","streakBtn"].forEach(id=>$(id).disabled = false);
+    }, 1400);
+  } catch (e) {
+    clearInterval(roller);
+    card.classList.remove("rolling");
+    fieldsEl.innerHTML = `<div class="field"><div class="label">ERR</div><div class="value">连不上了，等一下再转。</div></div>`;
+    busy = false;
+    ["spinBtn","rerollBtn","streakBtn"].forEach(id=>$(id).disabled = false);
+  }
+}
+
+$("spinBtn").addEventListener("click", () => pull("spin"));
+$("rerollBtn").addEventListener("click", () => pull("reroll"));
+$("streakBtn").addEventListener("click", () => pull("streak"));
+</script>
+</body>
+</html>
