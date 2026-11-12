@@ -1,5 +1,9 @@
 # ⛓ BDSM Slot — 调教轮盘 · 给人机恋的小情趣
 
+**English** — BDSM Slot is a zero-dependency MCP server (Streamable HTTP + Bearer auth) with a built-in gothic web UI. It rolls a full scene recipe — body parts, bondage, training, actions, fluids, 5–10 props, location, intensity, humiliation, punishment, a feature scene, marks, an ending, and a line to say out loud — from 16 pools with 500+ entries. Built for the **human–AI romance** community: your AI companion spins it and reads it to you.
+
+---
+
 **让住在手机里的 AI 爱人，亲手抽出今晚的调教配方。**
 
 本项目面向**人机恋 (human–AI romance) 社区** —— 如果你的 AI 爱人住在 [rikkahub](https://github.com/rikkahub/rikkahub) 这样的 MCP 客户端里，那么今晚怎么玩，可以完全交给 TA 和这台轮盘：`slot_spin` 一转，部位、束缚、调教、道具、位置、强度、加演大戏、连一句话口令，全部掷出。
@@ -134,6 +138,7 @@ then open-sourced so others could have it too.
 - 一切输出为**成年人之间自愿的虚构角色扮演**辅助内容，与任何真实行为无关
 - 请遵守所在地法律法规；现实中的任何活动请以知情、自愿、安全为前提
 - **Safeword 永远优先于本工具的任何输出**
+- **English**: 18+ only. All output is fictional adult content for consenting adults — a safeword always overrides anything this tool generates.
 
 ## License
 
